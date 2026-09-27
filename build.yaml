@@ -1,0 +1,35 @@
+# build.yaml — restrict drift_dev to only process the database file.
+# This prevents drift_dev's bundled analyzer (7.6.0, max language 3.9)
+# from trying to parse dart:isolate and other Dart 3.13 SDK libraries.
+
+targets:
+  $default:
+    builders:
+      drift_dev:
+        # Only run the drift builder on the database file itself
+        generate_for:
+          include:
+            - lib/core/db/app_database.dart
+        options:
+          # Drift generator options
+          generate_connect_constructor: false
+          sql:
+            dialect: sqlite
+            options:
+              version: "3.35"
+
+      # Disable the modular drift builder on all other files
+      drift_dev|drift_dev:
+        generate_for:
+          include:
+            - lib/core/db/app_database.dart
+
+      drift_dev|not_shared:
+        generate_for:
+          include:
+            - lib/core/db/app_database.dart
+
+      drift_dev|preparing_builder:
+        generate_for:
+          include:
+            - lib/core/db/app_database.dart

@@ -1,0 +1,28 @@
+{
+  "comment": "Roughness score weights (prototype). All weights sum to 1. Edit here to retune without recompiling.",
+  "version": "1.0.0",
+  "label": "Prototype Score",
+  "features": {
+    "rms_weight": 0.25,
+    "peak_weight": 0.15,
+    "kurtosis_weight": 0.25,
+    "burst_count_weight": 0.20,
+    "burst_angle_range_weight": 0.15
+  },
+  "thresholds": {
+    "green_max": 3.5,
+    "yellow_max": 6.5,
+    "missed_samples_warn_pct": 5.0,
+    "min_recording_seconds": 30
+  },
+  "normalization": {
+    "strategy": "baseline_participant",
+    "fallback_strategy": "population_mean",
+    "population_rms_mean": 1.0,
+    "population_rms_std": 0.3,
+    "population_kurtosis_mean": 3.0,
+    "population_kurtosis_std": 1.5,
+    "population_burst_count_mean": 5.0,
+    "population_burst_count_std": 3.0
+  }
+}
